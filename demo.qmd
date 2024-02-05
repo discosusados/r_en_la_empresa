@@ -1,0 +1,232 @@
+---
+title: "Demo"
+author: "Antonio J. Perán"
+lang: es
+format: 
+  html:
+    toc: true
+    toc-expand: 2
+    theme: cosmo
+---
+
+# ¿Qué vamos a hacer?
+
+Vamos a crear un procedimiento automático para obtener pronósticos mensuales de precios de acciones con datos procedentes de Yahoo Finanzas, aunque el mismo procedimiento se podría aplicar a cualquier otra serie.
+
+# Librerías necesarias
+
+Deberás tener instalados los siguientes paquetes (y sus dependencias) para seguir la demo.
+
+```{r, message=FALSE}
+library(data.table)
+library(forecast)
+library(quantmod)
+library(ggplot2)
+library(scales)
+```
+
+# Obtención y preparación de los datos
+
+Para obtener los datos, gracias al paquete `quantmod`, sólo necesitamos conocer el identificador de la acción de la que queremos obtener el histórico de precios. En este [enlace](https://stockanalysis.com/stocks/) tenéis una gran lista de identificadores con los que podéis probar.
+
+Elijamos, por ejemplo, las acciones de Apple, cuyo identificador es `AAPL`.
+
+```{r}
+datos_yahoo <- getSymbols('AAPL', src = 'yahoo', auto.assign = FALSE)
+```
+
+Veamos qué contiene el objeto `datos_yahoo`
+
+```{r}
+datos_yahoo
+```
+
+Como puedes ver, tiene un histórico diario que va desde 2007 hasta hace unos días. El significado de cada una de las columnas es
+
+- Open: Precio de la acción cuando se abrió el mercado.
+- High: Precio más alto que alcanzó la acción ese día.
+- Low: Precio más bajo que alcanzó la acción ese día.
+- Close: Precio de la acción cuando se cerró el mercado.
+- Volume: El volumen de acciones.
+- Adjusted: Precio de cierre ajustado.
+
+Nosotros usaremos el precio de cierre ajustado, es decir, la columna `AAPL.Adjusted`.
+
+Para ello, convertimos el objeto anterior a `data.table` y nos quedamos con las columnas 1 y 7, y cambiamos el nombre a otro más genérico.
+
+```{r}
+dt <- as.data.table(datos_yahoo)
+dt <- dt[, c(1, 7), with = FALSE]
+setnames(dt, c("fecha", "precio"))
+dt
+```
+
+Nuestro objetivo es obtener pronósticos mensuales, no diarios, por lo que tendremos que tomar medias para cada mes. Para ello definimos las variables mes y año y calculamos medias como sigue
+
+```{r}
+dt[, m_y := as.yearmon(fecha)]
+dt <- dt[, .(precio = mean(precio)), .(m_y)]
+dt
+```
+
+Ahora ya podemos, por ejemplo, hacer un gráfico de la serie
+
+```{r}
+ggplot(data = dt, aes(x = m_y, y = precio)) + 
+  geom_line() + 
+  scale_x_yearmon() + 
+  labs(title = "Precio mensual de las acciones de Apple", x = NULL, y = "Precio")
+```
+
+# Convertir los datos a serie temporal
+
+La mayoría de modelos de series temporales con R usan un objeto nativo llamado `ts`, luego debemos convertir nuestros datos a este tipo de objeto.
+
+Para ello, únicamente necesitamos: 
+
+- Los valores de la serie temporal
+- Cuándo empieza esta serie temporal: el día, mes, trimestre, ...
+- La frecuencia de la serie, es decir, si es anual, mensual, trimestral, ...
+
+En nuestro caso, la serie comienza en enero de 2007 y su frecuencia es mensual, luego daremos un 12 a este valor.
+
+```{r}
+valores_serie <- dt$precio
+empieza <- c(dt[1, year(m_y)], dt[1, month(m_y)]) # c(2007, 1)
+frecuencia <- 12
+serie_stock <- ts(valores_serie, start = empieza, frequency = frecuencia)
+serie_stock
+```
+
+# Entrenando el modelo
+
+## Nos quedamos con la serie sin los últimos 6 datos
+
+Como ya comentamos en el caso de uso de forecasting, necesitamos quitar algún valor a la serie, en este caso 6, para evaluar qué tal hace las predicciones, para ello cogemos la serie original menos los últimos 6 valores usando la función `head`.
+
+```{r}
+serie_stock_train <- utils::head(serie_stock, -6)
+serie_stock_train
+```
+
+## Entrenamos el modelo ARIMA
+
+Entrenamos un modelo ARIMA con la función `auto.arima`, que es un procedimiento automático que hace la selección de el mejor modelo ARIMA posible y todos los ajustes por nosotros. Si tenéis más interes en modelos de series temporales con R, os recomiento empezar por [este libro](https://otexts.com/fpp3/) o cualquiera de sus ediciones, que es del autor de `auto.arima`.
+
+```{r}
+arima_train <- auto.arima(serie_stock_train)
+```
+
+Ahora podemos representar fácilmente la serie temporal junto con la predicciones para los 6 últimos meses que nos da `auto.arima`
+
+```{r, warning=FALSE, message=FALSE}
+pron_ult_6m <- forecast(arima_train, 6)
+pron_ult_6m
+autoplot(pron_ult_6m) + 
+  xlim(c(2021, NA)) + 
+  labs(title = "Precio mensual de las acciones de Apple", 
+       subtitle = "Preddicciones realizadas con auto.arima",
+       x = NULL, 
+       y = "Precio")
+```
+
+## Calculamos el error que comete nuestro modelo al predecir
+
+La métrica de error que usaremos será el *MAPE*, cuya fórmula viene dada por
+
+$$\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\frac{A_i - F_i}{A_i}$$
+
+es útil, por tanto, crear una función propia que lo calcule
+
+```{r}
+#' Función que calcula el MAPE
+#'
+#' @param y_pred Valores pronosticados por el modelo.
+#' @param y_true Valores originales de la serie.
+#'
+#' @return Un número que es el MAPE sobre 1, no en porcentaje.
+#' 
+funcion_mape <- function(y_pred, y_true){
+  mean(abs(y_true - y_pred)/y_true)
+}
+```
+
+Debemos entonces obtener `y_pred` e `y_true`.
+
+`y_true` es muy sencillo, pues son los últimos 6 valores de la serie original. Una forma rápida de hacerlo sin subíndices es la siguiente
+
+```{r}
+y_true <- utils::tail(serie_stock, 6)
+```
+
+Para calcular `y_pred` usamos los pronósticos que obtuvimos en el paso anterior
+
+```{r}
+y_pred <- pron_ult_6m$mean
+```
+
+Finalmente el MAPE resultaría
+
+```{r}
+arima_mape <- funcion_mape(y_pred, y_true)
+arima_mape
+```
+
+## Reentrenamos el modelo con mismos hiperparámetros y todos los datos
+
+Una vez sabemos cuánto se equivoca el modelo, debemos reentrenarlo o reajustarlo para usar todos los datos disponibles (añadiendo los 6 valores que quitamos en un inicio). Hacer esto no tiene por qué ser sencillo, pero en caso de `auto.arima` sí que lo es, sólo basta con indicarle a la función `Arima` el modelo anterior y los datos completos.
+
+```{r}
+refit_arima <- Arima(serie_stock, model = arima_train)
+```
+
+## Generamos los pronósticos futuros de la serie
+
+Ahora, al igual que hicimos antes, con la función `forecast`, repetimos para dar pronósticos futuros de la serie y podemos pintarlos también.
+
+```{r, warning=FALSE, message=FALSE}
+pron_prox_6m <- forecast(refit_arima, 6)
+pron_prox_6m
+autoplot(pron_prox_6m) + 
+  xlim(c(2021, NA)) + 
+  labs(title = "Precio mensual de las acciones de Apple", 
+       subtitle = "Preddicciones realizadas con auto.arima",
+       x = NULL, 
+       y = "Precio")
+```
+
+## Calculamos cuál va a ser el incremento de la serie en los próximos meses
+
+Como ocurría con el MAPE, aquí también es conveniente crear una función que nos calcule el incremento entre dos valores.
+
+```{r}
+#' Función que calcula el incremento
+#'
+#' @param x0 Valor numérico, más reciente.
+#' @param x1 Valor numérico, más tardío.
+#'
+#' @return El incremento (sobre 1) entre los dos valores especificados
+#' 
+funcion_incremento <- function(x0, x1){
+  x1/x0 - 1 # ( (x1 - x0)/x0 )
+}
+```
+
+En nuestro caso, calcularemos el incremento entre el último valor de la serie conocido y el último valor pronosticado.
+
+```{r}
+x0 <- as.numeric(tail(serie_stock, 1))
+x1 <- as.numeric(tail(pron_prox_6m$mean, 1))
+inc <- funcion_incremento(x0, x1)
+```
+
+Luego pronosticamos que la serie de stock mensual de APPLE tendrá un incremento percentual del `r round(inc*100, 2)` % en los próximos 6 meses con un MAPE en test del `r round(arima_mape*100, 2)` %.
+
+# Lo bueno de todo esto
+
+Gracias a que R es un lenguaje de programación, hemos creado un procedimiento reproducible y reutilizable todas las veces que queramos. Para repetir este análisis para otra serie de Stock, lo único que tenemos que cambiar es el input, el identificador de la acción. 
+
+Es decir, cambiando en la línea 38 `AAPL` por cualquier otro identificador, por ejemplo, `MSFT` que es Microsoft, se repetiría todo el proceso de un plumazo!
+
+
+

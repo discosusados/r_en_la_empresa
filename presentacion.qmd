@@ -1,0 +1,397 @@
+---
+title: "R en la empresa"
+author: "Antonio J. Perán"
+lang: es
+format: 
+  revealjs:
+    theme: moon
+    incremental: true
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(data.table)
+library(zoo)
+library(forecast)
+library(ggplot2)
+library(scales)
+
+scale_y_euro <- scale_y_continuous(labels = dollar_format(suffix = " €", prefix = "", big.mark = ".", decimal.mark = ","))
+
+my_loess <- function(x, y, span = 0.5) {
+  predict(
+    stats::loess(
+      formula = y ~ x,
+      span = span,
+      family = "gaussian",
+      control = loess.control(surface = "direct")
+    ),
+    newdata = x
+  )
+}
+
+diff_slope <- function(y_pred, y_true){
+  y_pred <- tail(y_pred, 7)
+  y_true <- tail(y_true, 7)
+  slope_y_pred <- y_pred[7]/y_pred[1] - 1
+  slope_y_true <- y_true[7]/y_true[1] - 1
+  slope_y_true - slope_y_pred
+}
+
+mape <- function(y_pred, y_true){
+  mean(abs(y_true - y_pred)/y_true)
+}
+
+incr_6m <- function(x, suavizar = FALSE){
+  if(suavizar) x <- my_loess(1:length(x), x)
+  x <- tail(x, 7)
+  x[7]/x[1] - 1
+}
+```
+
+
+## ¿Quién soy?
+
+- Estudié matemáticas.
+- Mi primer contacto con R fue en el Servicio de Apoyo Estadístico de la Universidad de Murcia.
+- Estudié el máster en Tecnologías de datos masivos: Big Data de la Universidad de Murcia.
+- Como parte de mi TFM, trabajé con la empresa murciana Prosur usando R para determinar si unas salsas que producían estaban o no contaminadas con levaduras.
+- Actualmente trabajo Okuant, un fondo de inversión inmobiliario con sede en Madrid.
+
+## ¿De qué vamos a hablar?
+
+- Un par de casos de uso de R en Okuant.
+- Una demo de forecasting de series temporales de stock con series de yahoo Finanzas.
+
+# Okuant
+
+## Qué es
+
+- Es un fondo de inversión inmobiliario con sede en Madrid que opera en toda España. También tenemos oficinas en Barcelona y Sevilla.
+- De forma muy resumida, el negocio consiste en comprar grandes carteras de inmuebles a bancos y ponerlos a la venta.
+- También realizamos labores de gestión de activos (inmuebles) para otros fondos.
+
+## Departamento de Data Science
+
+El equipo lo formamos 4 personas
+
+- Adrián, físico, Team Lead.
+- Michal, economista, Data Scientist.
+- Mar, física, Data Scientist.
+- Antonio, matemático, Data Scientist.
+
+## Casos de uso de R en Okuant
+
+- Definir la arquitectura de datos y ETL
+- Crear un modelo de valoración automática de activos (Automated Valuation Model)
+- Forecasting de precios por zonas geográficas
+- Catalogación de zonas buenas (y malas) para inversión
+- Extracción de características de activos de fuentes de información no estructurada (Text-Mining)
+- Reporting: Creación de informes
+
+# Definir la arquitectura de datos y ETL
+
+## Objetivos
+
+- Integrar los datos de diversas fuentes en una base de datos centralizada.
+- El proceso de carga y transformación sea rastreable, eficiente y fácilmente reanudable en caso de error.
+- La base de datos mantenga un histórico.
+- Tener disponibles las métricas más utilizados por los diversos proyectos.
+
+## Fuentes de datos
+
+- Datos de inmuebles y carteras de bancos
+- APIs (Catastro, INE, IGN)
+- Nuestro propio CRM (Activos y Ofertas)
+
+:::{.notes}
+- Datos de inmuebles y carteras de bancos: Estos datos nos los sirven. Son ficheros .txt con datos de los distintos inmuebles así como sus históricos de precios.
+- APIs: De aquí obtenemos datos sociodemográficos como la población, el paro, población en edad de compra o de alquiler, y datos geográficos de mapas.
+- Nuestro propio CRM: Los datos de nuestros activos, sus características, precio, estados, etc y las ofertas y el estado de estas que realizan los comerciales.
+:::
+
+## Datos de inmuebles y carteras de bancos
+
+- Son archivos muy pesados, hablamos de millones de filas, Gb's de información.
+- Contienen variables de diversos tipos: `character`, `numeric`, `Date`, `logical`.
+- Contienen datos erróneos que hay que eliminar.
+- Contienen datos duplicados (mismo anuncio en el mismo portal o en distintos).
+- La gran mayoría no tiene informados ciertos datos necesarios como el distrito, por lo que hay que imputarlo.
+
+## APIs
+
+- **Catastro:** Peticiones a la API de catastro por referencia catastral para obtener la superficie construída, superficie útil, etc.
+- **INE y webs de ayuntamientos**: Librerías como `INEbaseR`, o directamente web scraping a webs de ayuntamientos.
+- **IGN**: Básicamente mapas de provincias, muncipios y distritos en formato `.shp`. Una buena librería para trabajar con este tipo de datos es la librería `sf`.
+
+## Nuestro propio CRM
+
+- Contienen variables de diversos tipos: `character`, `numeric`, `Date`, `logical`.
+- Aunque el dato sí esté informado, muchas veces viene de distinta forma, luego hay que reimputar también
+campos como distrito.
+- También se procesan datos de los estados de las ofertas que se hacen para cada inmueble.
+
+## Librerías {.smaller}
+
+:::: {.columns}
+
+::: {.column width="35%"}
+
+### `data.table`
+
+- Es una librería muy potente para trabajar con grandes volúmenes de datos, en lugar de `data.frames`, las tablas se llaman `data.tables`.
+- Tiene una sintaxis muy cómoda para expresar operaciones de datos complejas de forma muy sencilla.
+
+:::
+
+::: {.column width="35%"}
+
+### `targets`
+
+- Una librería muy reciente para creación de pipelines en R.
+- Divide el flujo de datos en *targets* que dependen unos de otros y almacena los resultados intermedios para poder retomar el proceso en caso de fallo o en caso de modificación de alguno de los *targets*.
+
+:::
+
+::: {.column width="30%"}
+
+### `Otras`
+
+- `sf`
+- `FNN`
+- `logger`
+
+:::
+
+::::
+
+# Forecasting de precios por zonas geográficas
+
+```{r}
+datos <- readRDS("data/serie_murcia.RDS")
+serie_murcia <- ts(datos$precio_em2, start = c(2014, 12), frequency = 12)
+```
+
+
+## Objetivo
+
+Obtener predicciones a futuro de la serie de precios medios mensuales de €/m2 para cada municipio con ciertos requisitos:
+
+- Las predicciones deben ser precisas en el largo plazo (6 meses).
+- Se dará más prioridad a afinar en el crecimiento o decrecimiento de la serie que a los valores.
+- Los pronósticos serán utilizados por otros departamentos.
+
+:::{.notes}
+- Los pronósticos serán utilizados por otros departamentos: deben estar en producción y en lenguaje *humano*.
+:::
+
+## La tabla de datos
+
+Básicamente trabajamos con 4 variables: `provincia`, `municipio`, `m_y` (mes y año) y `precio_em2`.
+
+Los últimos diez valores de la tabla para Murcia serían
+
+```{r}
+tail(datos, 10)
+```
+
+## Mejor en un gráfico
+
+```{r}
+ggplot(datos[m_y > 2018], aes(x = m_y, y = precio_em2)) + 
+  geom_line() +
+  zoo::scale_x_yearmon() +
+  scale_y_euro +
+  labs(title = "Precio €/m2 de vivienda de 2ª mano en Murcia", y = "Precio €/m2 corregido", x = NULL)
+```
+
+## ¿Qué es eso de forecasting? {.smaller}
+
+Predecir valores futuros de una serie temporal con los datos disponibles hasta la fecha, tanto los de la propia serie (autorregresión), como los de otras variables externas que puedan influir en la variable a predecir.
+
+```{r, eval=FALSE}
+arima_murcia <- auto.arima(serie_murcia)
+saveRDS(arima_murcia, file = "data/arima_murcia.RDS")
+```
+
+```{r}
+arima_murcia <- readRDS("data/arima_murcia.RDS")
+```
+
+```{r, fig.align='center'}
+autoplot(forecast(arima_murcia, h = 12)) + 
+  labs(title = "Forecasts del precio en Murcia", x = NULL, y = "Precio €/m2 corregido") + 
+  xlim(2018, NA) + 
+  scale_y_euro
+```
+
+## ¿Cómo cuantifico cuánto me estoy equivocando? {.smaller}
+
+Nosotros usamos dos métricas, una de ellas ampliamente utilizada y la otra más específica de nuestro caso de uso.
+
+- **MAPE** (Mean Absolute Percentaje Error): La fórmula es
+$$\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\frac{A_i - F_i}{A_i}$$
+Por ejemplo, si el valor real fuesen 1500 € y el valor pronosticado fuesen 1578 €, el MAPE en este caso sería del `r abs(1500-1578)/1500`, o en porcentaje `r 100*abs(1500-1578)/1500` %.
+- **Diferencia de incrementos:** Se suaviza con cualquier método de suavizado (en nuestro caso usamos LOESS) tanto la serie original como la serie original añadidas las predicciones. Se calcula el incremento de ambas series de los últimos 6 meses y se calcula la diferencia $incremento_{a} - incremento_{f}$.
+
+## Gráfico del cálculo de la Diferencia de pendientes {.smaller}
+
+```{r}
+arima_train <- auto.arima(head(serie_murcia, -6))
+datos[, serie_smooth := my_loess(as.numeric(m_y), precio_em2)]
+datos[, serie_pred := c(head(serie_murcia, -6), forecast(arima_train, 6)$mean)]
+datos[, serie_pred_smooth := my_loess(as.numeric(m_y), serie_pred)]
+```
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+Suavizamos la serie original.
+
+```{r, fig.height=10}
+ggplot(datos, aes(m_y)) + 
+  geom_line(aes(y = precio_em2)) + 
+  geom_line(aes(y = serie_smooth), color = "blue") +
+  labs(title = "Serie original y suavizada", x = NULL, y = "Precio €/m2 corregido") + 
+  xlim(2018, NA) + 
+  scale_y_euro
+```
+
+:::
+
+::: {.column width="50%"}
+
+Suavizamos la serie con predicciones.
+
+```{r, fig.height=10}
+ggplot(datos, aes(m_y)) + 
+  geom_line(aes(y = serie_pred)) + 
+  geom_line(aes(y = serie_pred_smooth), color = "red") +
+  labs(title = "Serie original con predicciones y suavizada", x = NULL, y = "Precio €/m2 corregido") + 
+  xlim(2018, NA) + 
+  scale_y_euro
+```
+
+:::
+
+::::
+
+## Gráfico del cálculo de la Diferencia de pendientes {.smaller}
+
+Calculamos la diferencia de los incrementos percentuales de los últimos 6 meses. El resultado sería `r datos[, diff_slope(serie_pred_smooth, serie_smooth)]`.
+
+```{r, fig.align='center'}
+ggplot(datos, aes(m_y)) + 
+  geom_line(aes(y = serie_smooth), color = "blue") + 
+  geom_line(aes(y = serie_pred_smooth), color = "red") +
+  labs(title = "Series original y pronóstico suavizadas", x = NULL, y = "Precio €/m2 corregido") + 
+  xlim(2018, NA) + 
+  scale_y_euro
+```
+
+
+## ¿Qué modelos hemos utilizado?
+
+- ARIMA 
+- VAR
+- Holt - Winters
+- bsts
+- XGBoost
+
+## ¿Cómo entrenamos y evaluamos los distintos modelos? {.smaller}
+
+Los pasos a seguir son
+
+- Cogemos la serie original y eliminamos los 6 últimos valores, que reservamos para testear la capacidad predictiva del modelo.
+- Ajustamos cualquier modelo de nuestra elección al subconjunto de la serie seleccionado en el paso anterior.
+- Calculamos las predicciones del modelo para los próximos 6 meses.
+- Con los 6 valores de pronóstico y los últimos 6 valores de la serie que reservamos, calculamos la métrica de nuestra elección, por ejemplo el MAPE.
+
+## ¿Cómo entrenamos y evaluamos los distintos modelos?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+```{r, fig.height=10}
+ggplot(datos, aes(m_y)) +
+  geom_line(aes(y = precio_em2)) +
+  geom_point(aes(y = precio_em2)) +
+  annotate(
+    "rect",
+    xmin = 2024 - 6/12,
+    xmax = 2024,
+    ymin = -Inf,
+    ymax = Inf,
+    alpha = 0.4,
+    fill = "blue"
+  ) +
+  labs(title = "Serie original", x = NULL, y = "Precio €/m2 corregido") +
+  xlim(2020, NA) +
+  scale_y_euro
+```
+
+:::
+
+::: {.column width="50%"}
+
+```{r, fig.height=10}
+ggplot(datos, aes(m_y)) + 
+  geom_line(aes(y = serie_pred)) + 
+    geom_point(aes(y = serie_pred)) +
+  annotate(
+    "rect",
+    xmin = 2024 - 6/12,
+    xmax = 2024,
+    ymin = -Inf,
+    ymax = Inf,
+    alpha = 0.4,
+    fill = "red"
+  ) +
+  labs(title = "Serie original con predicciones", x = NULL, y = "Precio €/m2 corregido") + 
+  xlim(2020, NA) + 
+  scale_y_euro
+```
+
+:::
+
+::::
+
+## ¿Como obtenemos el modelo final?
+
+Los pasos a seguir son
+
+- Cogemos el modelo ya entrenado (o sus hiperparámetros) y la serie original completa.
+- Reentrenamos el modelo o reajustamos el modelo a la serie completa.
+- Calculamos, ahora sí, pronósticos futuros para nuestra serie de precios.
+
+## ¿Como obtenemos el modelo final?
+
+```{r, fig.align='center'}
+refit_arima <- Arima(serie_murcia, model = arima_train)
+autoplot(forecast(refit_arima, h = 12)) + 
+  labs(title = "Forecasts del precio en Murcia", x = NULL, y = "Precio €/m2 corregido") + 
+  xlim(2018, NA) + 
+  scale_y_euro
+```
+
+## Tabla de errores y pronósticos
+
+Finalmente podemos crear una tabla con los pronósticos, el error que habíamos obtenido en test y el posible incremento de la serie de precios.
+
+```{r}
+pron <- forecast(refit_arima, h = 6)$mean
+dates <- as.yearmon(time(pron))
+inc6m <- paste0(round(incr_6m(c(serie_murcia, pron))*100, 2), " %")
+error_mape <- paste0(round(mape(datos[, tail(precio_em2)], datos[, tail(serie_pred)])*100, 2), " %")
+pron <- paste0(round(pron, 1), " €/m2")
+tabla <- as.data.table(cbind(error_mape, t(pron), inc6m))
+setnames(tabla, c("MAPE", as.character(dates), "Inc. próx 6m"))
+t(tabla)
+```
+
+# Pasamos a la demo
+

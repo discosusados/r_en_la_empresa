@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.361">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Antonio J. Perán">
+
+<title>Demo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="demo_files/libs/clipboard/clipboard.min.js"></script>
+<script src="demo_files/libs/quarto-html/quarto.js"></script>
+<script src="demo_files/libs/quarto-html/popper.min.js"></script>
+<script src="demo_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="demo_files/libs/quarto-html/anchor.min.js"></script>
+<link href="demo_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="demo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="demo_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="demo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="demo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="2">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#qué-vamos-a-hacer" id="toc-qué-vamos-a-hacer" class="nav-link active" data-scroll-target="#qué-vamos-a-hacer">¿Qué vamos a hacer?</a></li>
+  <li><a href="#librerías-necesarias" id="toc-librerías-necesarias" class="nav-link" data-scroll-target="#librerías-necesarias">Librerías necesarias</a></li>
+  <li><a href="#obtención-y-preparación-de-los-datos" id="toc-obtención-y-preparación-de-los-datos" class="nav-link" data-scroll-target="#obtención-y-preparación-de-los-datos">Obtención y preparación de los datos</a></li>
+  <li><a href="#convertir-los-datos-a-serie-temporal" id="toc-convertir-los-datos-a-serie-temporal" class="nav-link" data-scroll-target="#convertir-los-datos-a-serie-temporal">Convertir los datos a serie temporal</a></li>
+  <li><a href="#entrenando-el-modelo" id="toc-entrenando-el-modelo" class="nav-link" data-scroll-target="#entrenando-el-modelo">Entrenando el modelo</a>
+  <ul class="collapse">
+  <li><a href="#nos-quedamos-con-la-serie-sin-los-últimos-6-datos" id="toc-nos-quedamos-con-la-serie-sin-los-últimos-6-datos" class="nav-link" data-scroll-target="#nos-quedamos-con-la-serie-sin-los-últimos-6-datos">Nos quedamos con la serie sin los últimos 6 datos</a></li>
+  <li><a href="#entrenamos-el-modelo-arima" id="toc-entrenamos-el-modelo-arima" class="nav-link" data-scroll-target="#entrenamos-el-modelo-arima">Entrenamos el modelo ARIMA</a></li>
+  <li><a href="#calculamos-el-error-que-comete-nuestro-modelo-al-predecir" id="toc-calculamos-el-error-que-comete-nuestro-modelo-al-predecir" class="nav-link" data-scroll-target="#calculamos-el-error-que-comete-nuestro-modelo-al-predecir">Calculamos el error que comete nuestro modelo al predecir</a></li>
+  <li><a href="#reentrenamos-el-modelo-con-mismos-hiperparámetros-y-todos-los-datos" id="toc-reentrenamos-el-modelo-con-mismos-hiperparámetros-y-todos-los-datos" class="nav-link" data-scroll-target="#reentrenamos-el-modelo-con-mismos-hiperparámetros-y-todos-los-datos">Reentrenamos el modelo con mismos hiperparámetros y todos los datos</a></li>
+  <li><a href="#generamos-los-pronósticos-futuros-de-la-serie" id="toc-generamos-los-pronósticos-futuros-de-la-serie" class="nav-link" data-scroll-target="#generamos-los-pronósticos-futuros-de-la-serie">Generamos los pronósticos futuros de la serie</a></li>
+  <li><a href="#calculamos-cuál-va-a-ser-el-incremento-de-la-serie-en-los-próximos-meses" id="toc-calculamos-cuál-va-a-ser-el-incremento-de-la-serie-en-los-próximos-meses" class="nav-link" data-scroll-target="#calculamos-cuál-va-a-ser-el-incremento-de-la-serie-en-los-próximos-meses">Calculamos cuál va a ser el incremento de la serie en los próximos meses</a></li>
+  </ul></li>
+  <li><a href="#lo-bueno-de-todo-esto" id="toc-lo-bueno-de-todo-esto" class="nav-link" data-scroll-target="#lo-bueno-de-todo-esto">Lo bueno de todo esto</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Demo</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>Antonio J. Perán </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="qué-vamos-a-hacer" class="level1">
+<h1>¿Qué vamos a hacer?</h1>
+<p>Vamos a crear un procedimiento automático para obtener pronósticos mensuales de precios de acciones con datos procedentes de Yahoo Finanzas, aunque el mismo procedimiento se podría aplicar a cualquier otra serie.</p>
+</section>
+<section id="librerías-necesarias" class="level1">
+<h1>Librerías necesarias</h1>
+<p>Deberás tener instalados los siguientes paquetes (y sus dependencias) para seguir la demo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quantmod)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="obtención-y-preparación-de-los-datos" class="level1">
+<h1>Obtención y preparación de los datos</h1>
+<p>Para obtener los datos, gracias al paquete <code>quantmod</code>, sólo necesitamos conocer el identificador de la acción de la que queremos obtener el histórico de precios. En este <a href="https://stockanalysis.com/stocks/">enlace</a> tenéis una gran lista de identificadores con los que podéis probar.</p>
+<p>Elijamos, por ejemplo, las acciones de Apple, cuyo identificador es <code>AAPL</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>datos_yahoo <span class="ot">&lt;-</span> <span class="fu">getSymbols</span>(<span class="st">'AAPL'</span>, <span class="at">src =</span> <span class="st">'yahoo'</span>, <span class="at">auto.assign =</span> <span class="cn">FALSE</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Veamos qué contiene el objeto <code>datos_yahoo</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>datos_yahoo</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            AAPL.Open  AAPL.High   AAPL.Low AAPL.Close AAPL.Volume
+2007-01-03   3.081786   3.092143   2.925000   2.992857  1238319600
+2007-01-04   3.001786   3.069643   2.993571   3.059286   847260400
+2007-01-05   3.063214   3.078571   3.014286   3.037500   834741600
+2007-01-08   3.070000   3.090357   3.045714   3.052500   797106800
+2007-01-09   3.087500   3.320714   3.041071   3.306071  3349298400
+2007-01-10   3.383929   3.492857   3.337500   3.464286  2952880000
+2007-01-11   3.426429   3.456429   3.396429   3.421429  1440252800
+2007-01-12   3.378214   3.395000   3.329643   3.379286  1312690400
+2007-01-16   3.417143   3.473214   3.408929   3.467857  1244076400
+2007-01-17   3.484286   3.485714   3.386429   3.391071  1646260000
+       ...                                                        
+2024-01-22 192.300003 195.330002 192.259995 193.889999    60133900
+2024-01-23 195.020004 195.750000 193.830002 195.179993    42355600
+2024-01-24 195.419998 196.380005 194.339996 194.500000    53631300
+2024-01-25 195.220001 196.270004 193.110001 194.169998    54822100
+2024-01-26 194.270004 194.759995 191.940002 192.419998    44594000
+2024-01-29 192.009995 192.199997 189.580002 191.729996    47145600
+2024-01-30 190.940002 191.800003 187.470001 188.039993    55859400
+2024-01-31 187.039993 187.100006 184.350006 184.399994    55467800
+2024-02-01 183.990005 186.949997 183.820007 186.860001    64885400
+2024-02-02 179.860001 187.330002 179.250000 185.850006   102518000
+           AAPL.Adjusted
+2007-01-03      2.536984
+2007-01-04      2.593295
+2007-01-05      2.574827
+2007-01-08      2.587542
+2007-01-09      2.802489
+2007-01-10      2.936605
+2007-01-11      2.900276
+2007-01-12      2.864553
+2007-01-16      2.939632
+2007-01-17      2.874542
+       ...              
+2024-01-22    193.889999
+2024-01-23    195.179993
+2024-01-24    194.500000
+2024-01-25    194.169998
+2024-01-26    192.419998
+2024-01-29    191.729996
+2024-01-30    188.039993
+2024-01-31    184.399994
+2024-02-01    186.860001
+2024-02-02    185.850006</code></pre>
+</div>
+</div>
+<p>Como puedes ver, tiene un histórico diario que va desde 2007 hasta hace unos días. El significado de cada una de las columnas es</p>
+<ul>
+<li>Open: Precio de la acción cuando se abrió el mercado.</li>
+<li>High: Precio más alto que alcanzó la acción ese día.</li>
+<li>Low: Precio más bajo que alcanzó la acción ese día.</li>
+<li>Close: Precio de la acción cuando se cerró el mercado.</li>
+<li>Volume: El volumen de acciones.</li>
+<li>Adjusted: Precio de cierre ajustado.</li>
+</ul>
+<p>Nosotros usaremos el precio de cierre ajustado, es decir, la columna <code>AAPL.Adjusted</code>.</p>
+<p>Para ello, convertimos el objeto anterior a <code>data.table</code> y nos quedamos con las columnas 1 y 7, y cambiamos el nombre a otro más genérico.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fu">as.data.table</span>(datos_yahoo)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> dt[, <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">7</span>), with <span class="ot">=</span> <span class="cn">FALSE</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">setnames</span>(dt, <span class="fu">c</span>(<span class="st">"fecha"</span>, <span class="st">"precio"</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>dt</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           fecha     precio
+   1: 2007-01-03   2.536984
+   2: 2007-01-04   2.593295
+   3: 2007-01-05   2.574827
+   4: 2007-01-08   2.587542
+   5: 2007-01-09   2.802489
+  ---                      
+4297: 2024-01-29 191.729996
+4298: 2024-01-30 188.039993
+4299: 2024-01-31 184.399994
+4300: 2024-02-01 186.860001
+4301: 2024-02-02 185.850006</code></pre>
+</div>
+</div>
+<p>Nuestro objetivo es obtener pronósticos mensuales, no diarios, por lo que tendremos que tomar medias para cada mes. Para ello definimos las variables mes y año y calculamos medias como sigue</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>dt[, m_y <span class="sc">:</span><span class="er">=</span> <span class="fu">as.yearmon</span>(fecha)]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> dt[, .(<span class="at">precio =</span> <span class="fu">mean</span>(precio)), .(m_y)]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dt</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          m_y     precio
+  1: Jan 2007   2.690823
+  2: Feb 2007   2.595350
+  3: Mar 2007   2.742946
+  4: Apr 2007   2.836851
+  5: May 2007   3.294007
+ ---                    
+202: Oct 2023 174.438825
+203: Nov 2023 185.800922
+204: Dec 2023 194.308501
+205: Jan 2024 187.724284
+206: Feb 2024 186.355003</code></pre>
+</div>
+</div>
+<p>Ahora ya podemos, por ejemplo, hacer un gráfico de la serie</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> dt, <span class="fu">aes</span>(<span class="at">x =</span> m_y, <span class="at">y =</span> precio)) <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_yearmon</span>() <span class="sc">+</span> </span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Precio mensual de las acciones de Apple"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Precio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demo_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="convertir-los-datos-a-serie-temporal" class="level1">
+<h1>Convertir los datos a serie temporal</h1>
+<p>La mayoría de modelos de series temporales con R usan un objeto nativo llamado <code>ts</code>, luego debemos convertir nuestros datos a este tipo de objeto.</p>
+<p>Para ello, únicamente necesitamos:</p>
+<ul>
+<li>Los valores de la serie temporal</li>
+<li>Cuándo empieza esta serie temporal: el día, mes, trimestre, …</li>
+<li>La frecuencia de la serie, es decir, si es anual, mensual, trimestral, …</li>
+</ul>
+<p>En nuestro caso, la serie comienza en enero de 2007 y su frecuencia es mensual, luego daremos un 12 a este valor.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>valores_serie <span class="ot">&lt;-</span> dt<span class="sc">$</span>precio</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>empieza <span class="ot">&lt;-</span> <span class="fu">c</span>(dt[<span class="dv">1</span>, <span class="fu">year</span>(m_y)], dt[<span class="dv">1</span>, <span class="fu">month</span>(m_y)]) <span class="co"># c(2007, 1)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>frecuencia <span class="ot">&lt;-</span> <span class="dv">12</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>serie_stock <span class="ot">&lt;-</span> <span class="fu">ts</span>(valores_serie, <span class="at">start =</span> empieza, <span class="at">frequency =</span> frecuencia)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>serie_stock</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Jan        Feb        Mar        Apr        May        Jun
+2007   2.690823   2.595350   2.742946   2.836851   3.294007   3.684235
+2008   4.855331   3.788917   3.960572   4.789005   5.593461   5.403526
+2009   2.687599   2.848029   2.951893   3.633547   3.879618   4.224115
+2010   6.288430   6.018399   6.763603   7.603341   7.612815   7.905990
+2011  10.244209  10.631801  10.520035  10.305833  10.347287  10.023249
+2012  12.974889  15.063602  17.483629  18.346303  17.095074  17.394462
+2013  15.205053  14.016721  13.573857  12.895657  13.781197  13.159543
+2014  16.827648  16.571106  16.795095  17.042668  19.080578  20.372500
+2015  24.759943  28.164058  28.301698  28.598378  29.025632  28.834110
+2016  22.402256  21.892244  23.859818  24.425443  21.846930  22.245007
+2017  27.819410  31.203690  32.858286  33.388488  35.665532  34.686462
+2018  41.135456  39.743194  41.419708  40.313121  44.149680  44.945223
+2019  36.992595  41.336877  44.170477  48.320758  46.209963  46.681101
+2020  75.969688  75.953590  64.072063  66.499288  75.834454  84.652329
+2021 130.728054 129.400287 119.935245 129.718870 124.938517 128.111337
+2022 167.942631 168.090722 163.651215 165.146617 147.112233 138.598757
+2023 135.024280 150.273791 154.338707 164.378989 172.066845 183.792678
+2024 187.724284 186.355003                                            
+            Jul        Aug        Sep        Oct        Nov        Dec
+2007   4.120358   3.930917   4.301369   5.201437   5.287648   5.767401
+2008   5.078469   5.179006   4.276040   2.997272   2.843982   2.771418
+2009   4.520500   5.034021   5.382363   5.837830   6.064543   6.023205
+2010   7.718427   7.608628   8.290640   9.110568   9.433104   9.732753
+2011  11.269237  11.406216  11.882452  12.025851  11.650003  11.895686
+2012  18.196903  19.519824  20.722584  19.298018  17.221404  16.250625
+2013  13.271467  15.071014  14.947504  15.712033  16.411671  17.523111
+2014  21.201822  21.913523  22.404146  22.660609  25.334958  25.156013
+2015  28.276553  25.681500  25.563117  25.690570  26.875839  25.428829
+2016  22.690318  24.904513  25.660512  26.783159  25.616105  26.601590
+2017  34.796305  37.414511  37.125746  37.174926  40.708697  40.635762
+2018  45.347921  50.962318  53.101903  52.808257  45.846010  39.416149
+2019  49.643858  49.719320  52.935501  57.134382  63.901511  67.350051
+2020  93.577295 115.028368 112.932467 114.195876 114.760200 125.081396
+2021 143.076439 146.250906 146.417138 143.709688 152.471876 171.592163
+2022 148.385955 165.643625 151.900415 143.968458 144.998589 137.110288
+2023 191.899207 180.759220 176.769614 174.438825 185.800922 194.308501
+2024                                                                  </code></pre>
+</div>
+</div>
+</section>
+<section id="entrenando-el-modelo" class="level1">
+<h1>Entrenando el modelo</h1>
+<section id="nos-quedamos-con-la-serie-sin-los-últimos-6-datos" class="level2">
+<h2 class="anchored" data-anchor-id="nos-quedamos-con-la-serie-sin-los-últimos-6-datos">Nos quedamos con la serie sin los últimos 6 datos</h2>
+<p>Como ya comentamos en el caso de uso de forecasting, necesitamos quitar algún valor a la serie, en este caso 6, para evaluar qué tal hace las predicciones, para ello cogemos la serie original menos los últimos 6 valores usando la función <code>head</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>serie_stock_train <span class="ot">&lt;-</span> utils<span class="sc">::</span><span class="fu">head</span>(serie_stock, <span class="sc">-</span><span class="dv">6</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>serie_stock_train</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Jan        Feb        Mar        Apr        May        Jun
+2007   2.690823   2.595350   2.742946   2.836851   3.294007   3.684235
+2008   4.855331   3.788917   3.960572   4.789005   5.593461   5.403526
+2009   2.687599   2.848029   2.951893   3.633547   3.879618   4.224115
+2010   6.288430   6.018399   6.763603   7.603341   7.612815   7.905990
+2011  10.244209  10.631801  10.520035  10.305833  10.347287  10.023249
+2012  12.974889  15.063602  17.483629  18.346303  17.095074  17.394462
+2013  15.205053  14.016721  13.573857  12.895657  13.781197  13.159543
+2014  16.827648  16.571106  16.795095  17.042668  19.080578  20.372500
+2015  24.759943  28.164058  28.301698  28.598378  29.025632  28.834110
+2016  22.402256  21.892244  23.859818  24.425443  21.846930  22.245007
+2017  27.819410  31.203690  32.858286  33.388488  35.665532  34.686462
+2018  41.135456  39.743194  41.419708  40.313121  44.149680  44.945223
+2019  36.992595  41.336877  44.170477  48.320758  46.209963  46.681101
+2020  75.969688  75.953590  64.072063  66.499288  75.834454  84.652329
+2021 130.728054 129.400287 119.935245 129.718870 124.938517 128.111337
+2022 167.942631 168.090722 163.651215 165.146617 147.112233 138.598757
+2023 135.024280 150.273791 154.338707 164.378989 172.066845 183.792678
+            Jul        Aug        Sep        Oct        Nov        Dec
+2007   4.120358   3.930917   4.301369   5.201437   5.287648   5.767401
+2008   5.078469   5.179006   4.276040   2.997272   2.843982   2.771418
+2009   4.520500   5.034021   5.382363   5.837830   6.064543   6.023205
+2010   7.718427   7.608628   8.290640   9.110568   9.433104   9.732753
+2011  11.269237  11.406216  11.882452  12.025851  11.650003  11.895686
+2012  18.196903  19.519824  20.722584  19.298018  17.221404  16.250625
+2013  13.271467  15.071014  14.947504  15.712033  16.411671  17.523111
+2014  21.201822  21.913523  22.404146  22.660609  25.334958  25.156013
+2015  28.276553  25.681500  25.563117  25.690570  26.875839  25.428829
+2016  22.690318  24.904513  25.660512  26.783159  25.616105  26.601590
+2017  34.796305  37.414511  37.125746  37.174926  40.708697  40.635762
+2018  45.347921  50.962318  53.101903  52.808257  45.846010  39.416149
+2019  49.643858  49.719320  52.935501  57.134382  63.901511  67.350051
+2020  93.577295 115.028368 112.932467 114.195876 114.760200 125.081396
+2021 143.076439 146.250906 146.417138 143.709688 152.471876 171.592163
+2022 148.385955 165.643625 151.900415 143.968458 144.998589 137.110288
+2023 191.899207 180.759220                                            </code></pre>
+</div>
+</div>
+</section>
+<section id="entrenamos-el-modelo-arima" class="level2">
+<h2 class="anchored" data-anchor-id="entrenamos-el-modelo-arima">Entrenamos el modelo ARIMA</h2>
+<p>Entrenamos un modelo ARIMA con la función <code>auto.arima</code>, que es un procedimiento automático que hace la selección de el mejor modelo ARIMA posible y todos los ajustes por nosotros. Si tenéis más interes en modelos de series temporales con R, os recomiento empezar por <a href="https://otexts.com/fpp3/">este libro</a> o cualquiera de sus ediciones, que es del autor de <code>auto.arima</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>arima_train <span class="ot">&lt;-</span> <span class="fu">auto.arima</span>(serie_stock_train)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ahora podemos representar fácilmente la serie temporal junto con la predicciones para los 6 últimos meses que nos da <code>auto.arima</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pron_ult_6m <span class="ot">&lt;-</span> <span class="fu">forecast</span>(arima_train, <span class="dv">6</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>pron_ult_6m</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
+Sep 2023       178.9625 173.2299 184.6951 170.1953 187.7297
+Oct 2023       182.5566 173.5032 191.6099 168.7107 196.4024
+Nov 2023       185.4661 174.4079 196.5244 168.5540 202.3783
+Dec 2023       187.2420 174.5914 199.8925 167.8947 206.5893
+Jan 2024       188.9242 174.7538 203.0945 167.2524 210.5959
+Feb 2024       190.7985 175.1545 206.4424 166.8731 214.7238</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pron_ult_6m) <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">2021</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Precio mensual de las acciones de Apple"</span>, </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Preddicciones realizadas con auto.arima"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Precio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demo_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="calculamos-el-error-que-comete-nuestro-modelo-al-predecir" class="level2">
+<h2 class="anchored" data-anchor-id="calculamos-el-error-que-comete-nuestro-modelo-al-predecir">Calculamos el error que comete nuestro modelo al predecir</h2>
+<p>La métrica de error que usaremos será el <em>MAPE</em>, cuya fórmula viene dada por</p>
+<p><span class="math display">\[\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\frac{A_i - F_i}{A_i}\]</span></p>
+<p>es útil, por tanto, crear una función propia que lo calcule</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Función que calcula el MAPE</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param y_pred Valores pronosticados por el modelo.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param y_true Valores originales de la serie.</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return Un número que es el MAPE sobre 1, no en porcentaje.</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' </span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>funcion_mape <span class="ot">&lt;-</span> <span class="cf">function</span>(y_pred, y_true){</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">abs</span>(y_true <span class="sc">-</span> y_pred)<span class="sc">/</span>y_true)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Debemos entonces obtener <code>y_pred</code> e <code>y_true</code>.</p>
+<p><code>y_true</code> es muy sencillo, pues son los últimos 6 valores de la serie original. Una forma rápida de hacerlo sin subíndices es la siguiente</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>y_true <span class="ot">&lt;-</span> utils<span class="sc">::</span><span class="fu">tail</span>(serie_stock, <span class="dv">6</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para calcular <code>y_pred</code> usamos los pronósticos que obtuvimos en el paso anterior</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="ot">&lt;-</span> pron_ult_6m<span class="sc">$</span>mean</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Finalmente el MAPE resultaría</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>arima_mape <span class="ot">&lt;-</span> <span class="fu">funcion_mape</span>(y_pred, y_true)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>arima_mape</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.02122448</code></pre>
+</div>
+</div>
+</section>
+<section id="reentrenamos-el-modelo-con-mismos-hiperparámetros-y-todos-los-datos" class="level2">
+<h2 class="anchored" data-anchor-id="reentrenamos-el-modelo-con-mismos-hiperparámetros-y-todos-los-datos">Reentrenamos el modelo con mismos hiperparámetros y todos los datos</h2>
+<p>Una vez sabemos cuánto se equivoca el modelo, debemos reentrenarlo o reajustarlo para usar todos los datos disponibles (añadiendo los 6 valores que quitamos en un inicio). Hacer esto no tiene por qué ser sencillo, pero en caso de <code>auto.arima</code> sí que lo es, sólo basta con indicarle a la función <code>Arima</code> el modelo anterior y los datos completos.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>refit_arima <span class="ot">&lt;-</span> <span class="fu">Arima</span>(serie_stock, <span class="at">model =</span> arima_train)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="generamos-los-pronósticos-futuros-de-la-serie" class="level2">
+<h2 class="anchored" data-anchor-id="generamos-los-pronósticos-futuros-de-la-serie">Generamos los pronósticos futuros de la serie</h2>
+<p>Ahora, al igual que hicimos antes, con la función <code>forecast</code>, repetimos para dar pronósticos futuros de la serie y podemos pintarlos también.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>pron_prox_6m <span class="ot">&lt;-</span> <span class="fu">forecast</span>(refit_arima, <span class="dv">6</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>pron_prox_6m</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
+Mar 2024       189.1103 183.3777 194.8428 180.3431 197.8775
+Apr 2024       191.7007 182.6474 200.7540 177.8548 205.5465
+May 2024       193.4935 182.4352 204.5518 176.5814 210.4057
+Jun 2024       195.1617 182.5112 207.8122 175.8144 214.5090
+Jul 2024       196.9536 182.7833 211.1240 175.2819 218.6253
+Aug 2024       198.7928 183.1488 214.4367 174.8674 222.7181</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pron_prox_6m) <span class="sc">+</span> </span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">2021</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Precio mensual de las acciones de Apple"</span>, </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Preddicciones realizadas con auto.arima"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, </span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Precio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="demo_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="calculamos-cuál-va-a-ser-el-incremento-de-la-serie-en-los-próximos-meses" class="level2">
+<h2 class="anchored" data-anchor-id="calculamos-cuál-va-a-ser-el-incremento-de-la-serie-en-los-próximos-meses">Calculamos cuál va a ser el incremento de la serie en los próximos meses</h2>
+<p>Como ocurría con el MAPE, aquí también es conveniente crear una función que nos calcule el incremento entre dos valores.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Función que calcula el incremento</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param x0 Valor numérico, más reciente.</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co">#' @param x1 Valor numérico, más tardío.</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co">#'</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#' @return El incremento (sobre 1) entre los dos valores especificados</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co">#' </span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>funcion_incremento <span class="ot">&lt;-</span> <span class="cf">function</span>(x0, x1){</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  x1<span class="sc">/</span>x0 <span class="sc">-</span> <span class="dv">1</span> <span class="co"># ( (x1 - x0)/x0 )</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En nuestro caso, calcularemos el incremento entre el último valor de la serie conocido y el último valor pronosticado.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">tail</span>(serie_stock, <span class="dv">1</span>))</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">tail</span>(pron_prox_6m<span class="sc">$</span>mean, <span class="dv">1</span>))</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>inc <span class="ot">&lt;-</span> <span class="fu">funcion_incremento</span>(x0, x1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Luego pronosticamos que la serie de stock mensual de APPLE tendrá un incremento percentual del 6.67 % en los próximos 6 meses con un MAPE en test del 2.12 %.</p>
+</section>
+</section>
+<section id="lo-bueno-de-todo-esto" class="level1">
+<h1>Lo bueno de todo esto</h1>
+<p>Gracias a que R es un lenguaje de programación, hemos creado un procedimiento reproducible y reutilizable todas las veces que queramos. Para repetir este análisis para otra serie de Stock, lo único que tenemos que cambiar es el input, el identificador de la acción.</p>
+<p>Es decir, cambiando en la línea 38 <code>AAPL</code> por cualquier otro identificador, por ejemplo, <code>MSFT</code> que es Microsoft, se repetiría todo el proceso de un plumazo!</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
