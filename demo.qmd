@@ -92,7 +92,7 @@ En nuestro caso, la serie comienza en enero de 2007 y su frecuencia es mensual, 
 
 ```{r}
 valores_serie <- dt$precio
-empieza <- c(dt[1, year(m_y)], dt[1, month(m_y)]) # c(2007, 1)
+empieza <- c(2007, 1) # c(2007, 1)
 frecuencia <- 12
 serie_stock <- ts(valores_serie, start = empieza, frequency = frecuencia)
 serie_stock
@@ -123,7 +123,7 @@ Ahora podemos representar fácilmente la serie temporal junto con la prediccione
 pron_ult_6m <- forecast(arima_train, 6)
 pron_ult_6m
 autoplot(pron_ult_6m) + 
-  xlim(c(2021, NA)) + 
+  xlim(c(2022, NA)) + 
   labs(title = "Precio mensual de las acciones de Apple", 
        subtitle = "Preddicciones realizadas con auto.arima",
        x = NULL, 
@@ -134,7 +134,7 @@ autoplot(pron_ult_6m) +
 
 La métrica de error que usaremos será el *MAPE*, cuya fórmula viene dada por
 
-$$\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\frac{A_i - F_i}{A_i}$$
+$$\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\left\lvert\frac{A_i - F_i}{A_i}\right\lvert$$
 
 es útil, por tanto, crear una función propia que lo calcule
 

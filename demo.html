@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.361">
+<meta name="generator" content="quarto-1.6.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -64,13 +64,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="demo_files/libs/quarto-html/tippy.umd.min.js"></script>
 <script src="demo_files/libs/quarto-html/anchor.min.js"></script>
 <link href="demo_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="demo_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="demo_files/libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="demo_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="demo_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="demo_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="demo_files/libs/bootstrap/bootstrap-ddae12c640c633fda6ef43121ab94794.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -122,7 +149,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <section id="qué-vamos-a-hacer" class="level1">
 <h1>¿Qué vamos a hacer?</h1>
@@ -162,38 +191,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2007-01-16   3.417143   3.473214   3.408929   3.467857  1244076400
 2007-01-17   3.484286   3.485714   3.386429   3.391071  1646260000
        ...                                                        
-2024-01-22 192.300003 195.330002 192.259995 193.889999    60133900
-2024-01-23 195.020004 195.750000 193.830002 195.179993    42355600
-2024-01-24 195.419998 196.380005 194.339996 194.500000    53631300
-2024-01-25 195.220001 196.270004 193.110001 194.169998    54822100
-2024-01-26 194.270004 194.759995 191.940002 192.419998    44594000
-2024-01-29 192.009995 192.199997 189.580002 191.729996    47145600
-2024-01-30 190.940002 191.800003 187.470001 188.039993    55859400
-2024-01-31 187.039993 187.100006 184.350006 184.399994    55467800
-2024-02-01 183.990005 186.949997 183.820007 186.860001    64885400
-2024-02-02 179.860001 187.330002 179.250000 185.850006   102518000
+2025-01-13 233.529999 234.669998 229.720001 234.399994    49630700
+2025-01-14 234.750000 236.119995 232.470001 233.279999    39435300
+2025-01-15 234.639999 238.960007 234.429993 237.869995    39832000
+2025-01-16 237.350006 238.009995 228.029999 228.259995    71759100
+2025-01-17 232.119995 232.289993 228.479996 229.979996    68488300
+2025-01-21 224.000000 224.419998 219.380005 222.639999    98070400
+2025-01-22 219.789993 224.119995 219.789993 223.830002    64126500
+2025-01-23 224.740005 227.029999 222.300003 223.660004    60234800
+2025-01-24 224.779999 225.630005 221.410004 222.779999    54619500
+2025-01-27 224.029999 232.149994 224.000000 229.860001    94132139
            AAPL.Adjusted
-2007-01-03      2.536984
-2007-01-04      2.593295
-2007-01-05      2.574827
-2007-01-08      2.587542
-2007-01-09      2.802489
-2007-01-10      2.936605
-2007-01-11      2.900276
-2007-01-12      2.864553
-2007-01-16      2.939632
-2007-01-17      2.874542
+2007-01-03      2.524615
+2007-01-04      2.580652
+2007-01-05      2.562274
+2007-01-08      2.574927
+2007-01-09      2.788827
+2007-01-10      2.922289
+2007-01-11      2.886137
+2007-01-12      2.850587
+2007-01-16      2.925301
+2007-01-17      2.860528
        ...              
-2024-01-22    193.889999
-2024-01-23    195.179993
-2024-01-24    194.500000
-2024-01-25    194.169998
-2024-01-26    192.419998
-2024-01-29    191.729996
-2024-01-30    188.039993
-2024-01-31    184.399994
-2024-02-01    186.860001
-2024-02-02    185.850006</code></pre>
+2025-01-13    234.399994
+2025-01-14    233.279999
+2025-01-15    237.869995
+2025-01-16    228.259995
+2025-01-17    229.979996
+2025-01-21    222.639999
+2025-01-22    223.830002
+2025-01-23    223.660004
+2025-01-24    222.779999
+2025-01-27    229.860001</code></pre>
 </div>
 </div>
 <p>Como puedes ver, tiene un histórico diario que va desde 2007 hasta hace unos días. El significado de cada una de las columnas es</p>
@@ -214,17 +243,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>dt</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           fecha     precio
-   1: 2007-01-03   2.536984
-   2: 2007-01-04   2.593295
-   3: 2007-01-05   2.574827
-   4: 2007-01-08   2.587542
-   5: 2007-01-09   2.802489
+          &lt;Date&gt;      &lt;num&gt;
+   1: 2007-01-03   2.524615
+   2: 2007-01-04   2.580652
+   3: 2007-01-05   2.562274
+   4: 2007-01-08   2.574927
+   5: 2007-01-09   2.788827
   ---                      
-4297: 2024-01-29 191.729996
-4298: 2024-01-30 188.039993
-4299: 2024-01-31 184.399994
-4300: 2024-02-01 186.860001
-4301: 2024-02-02 185.850006</code></pre>
+4542: 2025-01-21 222.639999
+4543: 2025-01-22 223.830002
+4544: 2025-01-23 223.660004
+4545: 2025-01-24 222.779999
+4546: 2025-01-27 229.860001</code></pre>
 </div>
 </div>
 <p>Nuestro objetivo es obtener pronósticos mensuales, no diarios, por lo que tendremos que tomar medias para cada mes. Para ello definimos las variables mes y año y calculamos medias como sigue</p>
@@ -233,18 +263,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> dt[, .(<span class="at">precio =</span> <span class="fu">mean</span>(precio)), .(m_y)]</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>dt</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>          m_y     precio
-  1: Jan 2007   2.690823
-  2: Feb 2007   2.595350
-  3: Mar 2007   2.742946
-  4: Apr 2007   2.836851
-  5: May 2007   3.294007
- ---                    
-202: Oct 2023 174.438825
-203: Nov 2023 185.800922
-204: Dec 2023 194.308501
-205: Jan 2024 187.724284
-206: Feb 2024 186.355003</code></pre>
+<pre><code>           m_y     precio
+     &lt;yearmon&gt;      &lt;num&gt;
+  1:  Jan 2007   2.677705
+  2:  Feb 2007   2.582698
+  3:  Mar 2007   2.729574
+  4:  Apr 2007   2.823021
+  5:  May 2007   3.277948
+ ---                     
+213:  Sep 2024 223.512093
+214:  Oct 2024 229.803258
+215:  Nov 2024 227.749033
+216:  Dec 2024 249.322856
+217:  Jan 2025 233.783125</code></pre>
 </div>
 </div>
 <p>Ahora ya podemos, por ejemplo, hacer un gráfico de la serie</p>
@@ -254,7 +285,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_yearmon</span>() <span class="sc">+</span> </span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Precio mensual de las acciones de Apple"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Precio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="demo_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="demo_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -270,49 +305,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>En nuestro caso, la serie comienza en enero de 2007 y su frecuencia es mensual, luego daremos un 12 a este valor.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>valores_serie <span class="ot">&lt;-</span> dt<span class="sc">$</span>precio</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>empieza <span class="ot">&lt;-</span> <span class="fu">c</span>(dt[<span class="dv">1</span>, <span class="fu">year</span>(m_y)], dt[<span class="dv">1</span>, <span class="fu">month</span>(m_y)]) <span class="co"># c(2007, 1)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>empieza <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2007</span>, <span class="dv">1</span>) <span class="co"># c(2007, 1)</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>frecuencia <span class="ot">&lt;-</span> <span class="dv">12</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>serie_stock <span class="ot">&lt;-</span> <span class="fu">ts</span>(valores_serie, <span class="at">start =</span> empieza, <span class="at">frequency =</span> frecuencia)</span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>serie_stock</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Jan        Feb        Mar        Apr        May        Jun
-2007   2.690823   2.595350   2.742946   2.836851   3.294007   3.684235
-2008   4.855331   3.788917   3.960572   4.789005   5.593461   5.403526
-2009   2.687599   2.848029   2.951893   3.633547   3.879618   4.224115
-2010   6.288430   6.018399   6.763603   7.603341   7.612815   7.905990
-2011  10.244209  10.631801  10.520035  10.305833  10.347287  10.023249
-2012  12.974889  15.063602  17.483629  18.346303  17.095074  17.394462
-2013  15.205053  14.016721  13.573857  12.895657  13.781197  13.159543
-2014  16.827648  16.571106  16.795095  17.042668  19.080578  20.372500
-2015  24.759943  28.164058  28.301698  28.598378  29.025632  28.834110
-2016  22.402256  21.892244  23.859818  24.425443  21.846930  22.245007
-2017  27.819410  31.203690  32.858286  33.388488  35.665532  34.686462
-2018  41.135456  39.743194  41.419708  40.313121  44.149680  44.945223
-2019  36.992595  41.336877  44.170477  48.320758  46.209963  46.681101
-2020  75.969688  75.953590  64.072063  66.499288  75.834454  84.652329
-2021 130.728054 129.400287 119.935245 129.718870 124.938517 128.111337
-2022 167.942631 168.090722 163.651215 165.146617 147.112233 138.598757
-2023 135.024280 150.273791 154.338707 164.378989 172.066845 183.792678
-2024 187.724284 186.355003                                            
+2007   2.677705   2.582698   2.729574   2.823021   3.277948   3.666274
+2008   4.831661   3.770445   3.941263   4.765658   5.566192   5.377183
+2009   2.674496   2.834144   2.937502   3.615833   3.860704   4.203522
+2010   6.257772   5.989058   6.730629   7.566274   7.575702   7.867448
+2011  10.194268  10.579969  10.468748  10.255591  10.296842   9.974384
+2012  12.911635  14.990166  17.398394  18.256862  17.011731  17.309660
+2013  15.130926  13.948388  13.507684  12.832789  13.714011  13.095388
+2014  16.745610  16.490317  16.713217  16.959581  18.987558  20.273182
+2015  24.639236  28.026753  28.163723  28.458956  28.884130  28.693536
+2016  22.293041  21.785516  23.743501  24.306367  21.740423  22.136561
+2017  27.683785  31.051569  32.698097  33.225715  35.491659  34.517362
+2018  40.934914  39.549440  41.217779  40.116591  43.934444  44.726109
+2019  36.812253  41.135351  43.955140  48.085189  45.984683  46.453525
+2020  75.599325  75.583306  63.759704  66.175092  75.464749  84.239639
+2021 130.090743 128.769443 119.350544 129.086470 124.329423 127.486779
+2022 167.123895 167.271258 162.853396 164.341502 146.395033 137.923060
+2023 134.366019 149.541184 153.586283 163.577617 171.227995 182.896663
+2024 186.809099 184.037743 172.073872 168.993062 185.788819 205.798268
+2025 233.783125                                                       
             Jul        Aug        Sep        Oct        Nov        Dec
-2007   4.120358   3.930917   4.301369   5.201437   5.287648   5.767401
-2008   5.078469   5.179006   4.276040   2.997272   2.843982   2.771418
-2009   4.520500   5.034021   5.382363   5.837830   6.064543   6.023205
-2010   7.718427   7.608628   8.290640   9.110568   9.433104   9.732753
-2011  11.269237  11.406216  11.882452  12.025851  11.650003  11.895686
-2012  18.196903  19.519824  20.722584  19.298018  17.221404  16.250625
-2013  13.271467  15.071014  14.947504  15.712033  16.411671  17.523111
-2014  21.201822  21.913523  22.404146  22.660609  25.334958  25.156013
-2015  28.276553  25.681500  25.563117  25.690570  26.875839  25.428829
-2016  22.690318  24.904513  25.660512  26.783159  25.616105  26.601590
-2017  34.796305  37.414511  37.125746  37.174926  40.708697  40.635762
-2018  45.347921  50.962318  53.101903  52.808257  45.846010  39.416149
-2019  49.643858  49.719320  52.935501  57.134382  63.901511  67.350051
-2020  93.577295 115.028368 112.932467 114.195876 114.760200 125.081396
-2021 143.076439 146.250906 146.417138 143.709688 152.471876 171.592163
-2022 148.385955 165.643625 151.900415 143.968458 144.998589 137.110288
-2023 191.899207 180.759220 176.769614 174.438825 185.800922 194.308501
-2024                                                                  </code></pre>
+2007   4.100271   3.911754   4.280400   5.176079   5.261870   5.739284
+2008   5.053711   5.153757   4.255193   2.982660   2.830117   2.757906
+2009   4.498462   5.009480   5.356123   5.809370   6.034978   5.993841
+2010   7.680799   7.571535   8.250222   9.066153   9.387116   9.685305
+2011  11.214297  11.350608  11.824523  11.967223  11.593208  11.837693
+2012  18.108190  19.424663  20.621559  19.203938  17.137447  16.171399
+2013  13.206767  14.997542  14.874633  15.635434  16.331662  17.437685
+2014  21.098462  21.806692  22.294922  22.550135  25.211445  25.033373
+2015  28.138701  25.556299  25.438494  25.565323  26.744814  25.304859
+2016  22.579698  24.783100  25.535411  26.652586  25.491222  26.471903
+2017  34.626665  37.232110  36.944753  36.993692  40.510236  40.437656
+2018  45.126845  50.713869  52.843024  52.550810  45.622506  39.223988
+2019  49.401837  49.476933  52.677435  56.855846  63.589980  67.021712
+2020  93.121092 114.467585 112.381901 113.639155 114.200726 124.471608
+2021 142.378919 145.537911 145.703331 143.009078 151.728551 170.755617
+2022 147.662554 164.836090 151.159879 143.266590 144.291704 136.441855
+2023 190.963670 179.877997 175.907835 173.588407 184.895114 193.361219
+2024 224.092422 221.316174 223.512093 229.803258 227.749033 249.322856
+2025                                                                  </code></pre>
 </div>
 </div>
 </section>
@@ -326,41 +363,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>serie_stock_train</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Jan        Feb        Mar        Apr        May        Jun
-2007   2.690823   2.595350   2.742946   2.836851   3.294007   3.684235
-2008   4.855331   3.788917   3.960572   4.789005   5.593461   5.403526
-2009   2.687599   2.848029   2.951893   3.633547   3.879618   4.224115
-2010   6.288430   6.018399   6.763603   7.603341   7.612815   7.905990
-2011  10.244209  10.631801  10.520035  10.305833  10.347287  10.023249
-2012  12.974889  15.063602  17.483629  18.346303  17.095074  17.394462
-2013  15.205053  14.016721  13.573857  12.895657  13.781197  13.159543
-2014  16.827648  16.571106  16.795095  17.042668  19.080578  20.372500
-2015  24.759943  28.164058  28.301698  28.598378  29.025632  28.834110
-2016  22.402256  21.892244  23.859818  24.425443  21.846930  22.245007
-2017  27.819410  31.203690  32.858286  33.388488  35.665532  34.686462
-2018  41.135456  39.743194  41.419708  40.313121  44.149680  44.945223
-2019  36.992595  41.336877  44.170477  48.320758  46.209963  46.681101
-2020  75.969688  75.953590  64.072063  66.499288  75.834454  84.652329
-2021 130.728054 129.400287 119.935245 129.718870 124.938517 128.111337
-2022 167.942631 168.090722 163.651215 165.146617 147.112233 138.598757
-2023 135.024280 150.273791 154.338707 164.378989 172.066845 183.792678
+2007   2.677705   2.582698   2.729574   2.823021   3.277948   3.666274
+2008   4.831661   3.770445   3.941263   4.765658   5.566192   5.377183
+2009   2.674496   2.834144   2.937502   3.615833   3.860704   4.203522
+2010   6.257772   5.989058   6.730629   7.566274   7.575702   7.867448
+2011  10.194268  10.579969  10.468748  10.255591  10.296842   9.974384
+2012  12.911635  14.990166  17.398394  18.256862  17.011731  17.309660
+2013  15.130926  13.948388  13.507684  12.832789  13.714011  13.095388
+2014  16.745610  16.490317  16.713217  16.959581  18.987558  20.273182
+2015  24.639236  28.026753  28.163723  28.458956  28.884130  28.693536
+2016  22.293041  21.785516  23.743501  24.306367  21.740423  22.136561
+2017  27.683785  31.051569  32.698097  33.225715  35.491659  34.517362
+2018  40.934914  39.549440  41.217779  40.116591  43.934444  44.726109
+2019  36.812253  41.135351  43.955140  48.085189  45.984683  46.453525
+2020  75.599325  75.583306  63.759704  66.175092  75.464749  84.239639
+2021 130.090743 128.769443 119.350544 129.086470 124.329423 127.486779
+2022 167.123895 167.271258 162.853396 164.341502 146.395033 137.923060
+2023 134.366019 149.541184 153.586283 163.577617 171.227995 182.896663
+2024 186.809099 184.037743 172.073872 168.993062 185.788819 205.798268
             Jul        Aug        Sep        Oct        Nov        Dec
-2007   4.120358   3.930917   4.301369   5.201437   5.287648   5.767401
-2008   5.078469   5.179006   4.276040   2.997272   2.843982   2.771418
-2009   4.520500   5.034021   5.382363   5.837830   6.064543   6.023205
-2010   7.718427   7.608628   8.290640   9.110568   9.433104   9.732753
-2011  11.269237  11.406216  11.882452  12.025851  11.650003  11.895686
-2012  18.196903  19.519824  20.722584  19.298018  17.221404  16.250625
-2013  13.271467  15.071014  14.947504  15.712033  16.411671  17.523111
-2014  21.201822  21.913523  22.404146  22.660609  25.334958  25.156013
-2015  28.276553  25.681500  25.563117  25.690570  26.875839  25.428829
-2016  22.690318  24.904513  25.660512  26.783159  25.616105  26.601590
-2017  34.796305  37.414511  37.125746  37.174926  40.708697  40.635762
-2018  45.347921  50.962318  53.101903  52.808257  45.846010  39.416149
-2019  49.643858  49.719320  52.935501  57.134382  63.901511  67.350051
-2020  93.577295 115.028368 112.932467 114.195876 114.760200 125.081396
-2021 143.076439 146.250906 146.417138 143.709688 152.471876 171.592163
-2022 148.385955 165.643625 151.900415 143.968458 144.998589 137.110288
-2023 191.899207 180.759220                                            </code></pre>
+2007   4.100271   3.911754   4.280400   5.176079   5.261870   5.739284
+2008   5.053711   5.153757   4.255193   2.982660   2.830117   2.757906
+2009   4.498462   5.009480   5.356123   5.809370   6.034978   5.993841
+2010   7.680799   7.571535   8.250222   9.066153   9.387116   9.685305
+2011  11.214297  11.350608  11.824523  11.967223  11.593208  11.837693
+2012  18.108190  19.424663  20.621559  19.203938  17.137447  16.171399
+2013  13.206767  14.997542  14.874633  15.635434  16.331662  17.437685
+2014  21.098462  21.806692  22.294922  22.550135  25.211445  25.033373
+2015  28.138701  25.556299  25.438494  25.565323  26.744814  25.304859
+2016  22.579698  24.783100  25.535411  26.652586  25.491222  26.471903
+2017  34.626665  37.232110  36.944753  36.993692  40.510236  40.437656
+2018  45.126845  50.713869  52.843024  52.550810  45.622506  39.223988
+2019  49.401837  49.476933  52.677435  56.855846  63.589980  67.021712
+2020  93.121092 114.467585 112.381901 113.639155 114.200726 124.471608
+2021 142.378919 145.537911 145.703331 143.009078 151.728551 170.755617
+2022 147.662554 164.836090 151.159879 143.266590 144.291704 136.441855
+2023 190.963670 179.877997 175.907835 173.588407 184.895114 193.361219
+2024 224.092422                                                       </code></pre>
 </div>
 </div>
 </section>
@@ -376,28 +415,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>pron_ult_6m</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
-Sep 2023       178.9625 173.2299 184.6951 170.1953 187.7297
-Oct 2023       182.5566 173.5032 191.6099 168.7107 196.4024
-Nov 2023       185.4661 174.4079 196.5244 168.5540 202.3783
-Dec 2023       187.2420 174.5914 199.8925 167.8947 206.5893
-Jan 2024       188.9242 174.7538 203.0945 167.2524 210.5959
-Feb 2024       190.7985 175.1545 206.4424 166.8731 214.7238</code></pre>
+Aug 2024       230.3275 224.0619 236.5932 220.7451 239.9100
+Sep 2024       232.7125 222.1859 243.2391 216.6134 248.8116
+Oct 2024       235.0975 221.4826 248.7124 214.2753 255.9197
+Nov 2024       237.4825 221.2656 253.6994 212.6809 262.2841
+Dec 2024       239.8675 221.3273 258.4077 211.5127 268.2222
+Jan 2025       242.2525 221.5721 262.9328 210.6246 273.8804</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pron_ult_6m) <span class="sc">+</span> </span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">2021</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">2022</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Precio mensual de las acciones de Apple"</span>, </span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Preddicciones realizadas con auto.arima"</span>,</span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, </span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Precio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="demo_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="demo_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
 <section id="calculamos-el-error-que-comete-nuestro-modelo-al-predecir" class="level2">
 <h2 class="anchored" data-anchor-id="calculamos-el-error-que-comete-nuestro-modelo-al-predecir">Calculamos el error que comete nuestro modelo al predecir</h2>
 <p>La métrica de error que usaremos será el <em>MAPE</em>, cuya fórmula viene dada por</p>
-<p><span class="math display">\[\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\frac{A_i - F_i}{A_i}\]</span></p>
+<p><span class="math display">\[\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\left\lvert\frac{A_i - F_i}{A_i}\right\lvert\]</span></p>
 <p>es útil, por tanto, crear una función propia que lo calcule</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#' Función que calcula el MAPE</span></span>
@@ -425,7 +468,7 @@ Feb 2024       190.7985 175.1545 206.4424 166.8731 214.7238</code></pre>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>arima_mape <span class="ot">&lt;-</span> <span class="fu">funcion_mape</span>(y_pred, y_true)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>arima_mape</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.02122448</code></pre>
+<pre><code>[1] 0.03696791</code></pre>
 </div>
 </div>
 </section>
@@ -444,12 +487,12 @@ Feb 2024       190.7985 175.1545 206.4424 166.8731 214.7238</code></pre>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>pron_prox_6m</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         Point Forecast    Lo 80    Hi 80    Lo 95    Hi 95
-Mar 2024       189.1103 183.3777 194.8428 180.3431 197.8775
-Apr 2024       191.7007 182.6474 200.7540 177.8548 205.5465
-May 2024       193.4935 182.4352 204.5518 176.5814 210.4057
-Jun 2024       195.1617 182.5112 207.8122 175.8144 214.5090
-Jul 2024       196.9536 182.7833 211.1240 175.2819 218.6253
-Aug 2024       198.7928 183.1488 214.4367 174.8674 222.7181</code></pre>
+Feb 2025       227.7449 221.4792 234.0105 218.1624 237.3273
+Mar 2025       229.7867 219.2601 240.3133 213.6876 245.8858
+Apr 2025       231.8285 218.2136 245.4434 211.0063 252.6507
+May 2025       233.8703 217.6534 250.0872 209.0687 258.6719
+Jun 2025       235.9121 217.3720 254.4522 207.5574 264.2668
+Jul 2025       237.9539 217.2736 258.6342 206.3261 269.5817</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(pron_prox_6m) <span class="sc">+</span> </span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="dv">2021</span>, <span class="cn">NA</span>)) <span class="sc">+</span> </span>
@@ -458,7 +501,11 @@ Aug 2024       198.7928 183.1488 214.4367 174.8674 222.7181</code></pre>
 <span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="cn">NULL</span>, </span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Precio"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="demo_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="demo_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -483,7 +530,7 @@ Aug 2024       198.7928 183.1488 214.4367 174.8674 222.7181</code></pre>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">tail</span>(pron_prox_6m<span class="sc">$</span>mean, <span class="dv">1</span>))</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>inc <span class="ot">&lt;-</span> <span class="fu">funcion_incremento</span>(x0, x1)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Luego pronosticamos que la serie de stock mensual de APPLE tendrá un incremento percentual del 6.67 % en los próximos 6 meses con un MAPE en test del 2.12 %.</p>
+<p>Luego pronosticamos que la serie de stock mensual de APPLE tendrá un incremento percentual del 1.78 % en los próximos 6 meses con un MAPE en test del 3.7 %.</p>
 </section>
 </section>
 <section id="lo-bueno-de-todo-esto" class="level1">
@@ -529,18 +576,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -572,11 +608,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -586,8 +659,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -599,7 +681,129 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -643,6 +847,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -668,6 +873,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -728,6 +959,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

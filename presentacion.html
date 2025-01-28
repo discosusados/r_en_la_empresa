@@ -6,9 +6,8 @@
 <script src="presentacion_files/libs/quarto-html/tippy.umd.min.js"></script>
 <link href="presentacion_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="presentacion_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="presentacion_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="presentacion_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.3.361">
+<link href="presentacion_files/libs/quarto-html/quarto-syntax-highlighting-dark-43df0d6f53b733b42d37fa7808e17715.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.6.37">
 
   <meta name="author" content="Antonio J. Perán">
   <title>R en la empresa</title>
@@ -30,208 +29,11 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="presentacion_files/libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="presentacion_files/libs/revealjs/dist/theme/quarto-ab7a322b4ca39adb1086c9e0171297e3.css">
   <link href="presentacion_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="presentacion_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="presentacion_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
   <link href="presentacion_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
-  <style type="text/css">
-
-  .callout {
-    margin-top: 1em;
-    margin-bottom: 1em;  
-    border-radius: .25rem;
-  }
-
-  .callout.callout-style-simple { 
-    padding: 0em 0.5em;
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-    display: flex;
-  }
-
-  .callout.callout-style-default {
-    border-left: solid #acacac .3rem;
-    border-right: solid 1px silver;
-    border-top: solid 1px silver;
-    border-bottom: solid 1px silver;
-  }
-
-  .callout .callout-body-container {
-    flex-grow: 1;
-  }
-
-  .callout.callout-style-simple .callout-body {
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-style-default .callout-body {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
-
-  .callout.callout-titled.callout-style-simple .callout-body {
-    margin-top: 0.2em;
-  }
-
-  .callout:not(.callout-titled) .callout-body {
-      display: flex;
-  }
-
-  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
-    padding-left: 1.6em;
-  }
-
-  .callout.callout-titled .callout-header {
-    padding-top: 0.2em;
-    margin-bottom: -0.2em;
-  }
-
-  .callout.callout-titled .callout-title  p {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-    
-  .callout.callout-titled.callout-style-simple .callout-content  p {
-    margin-top: 0;
-  }
-
-  .callout.callout-titled.callout-style-default .callout-content  p {
-    margin-top: 0.7em;
-  }
-
-  .callout.callout-style-simple div.callout-title {
-    border-bottom: none;
-    font-size: .9rem;
-    font-weight: 600;
-    opacity: 75%;
-  }
-
-  .callout.callout-style-default  div.callout-title {
-    border-bottom: none;
-    font-weight: 600;
-    opacity: 85%;
-    font-size: 0.9rem;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-default div.callout-content {
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  .callout.callout-style-simple .callout-icon::before {
-    height: 1rem;
-    width: 1rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 1rem 1rem;
-  }
-
-  .callout.callout-style-default .callout-icon::before {
-    height: 0.9rem;
-    width: 0.9rem;
-    display: inline-block;
-    content: "";
-    background-repeat: no-repeat;
-    background-size: 0.9rem 0.9rem;
-  }
-
-  .callout-title {
-    display: flex
-  }
-    
-  .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  .callout.no-icon::before {
-    display: none !important;
-  }
-
-  .callout.callout-titled .callout-body > .callout-content > :last-child {
-    margin-bottom: 0.5rem;
-  }
-
-  .callout.callout-titled .callout-icon::before {
-    margin-top: .5rem;
-    padding-right: .5rem;
-  }
-
-  .callout:not(.callout-titled) .callout-icon::before {
-    margin-top: 1rem;
-    padding-right: .5rem;
-  }
-
-  /* Callout Types */
-
-  div.callout-note {
-    border-left-color: #4582ec !important;
-  }
-
-  div.callout-note .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
-  }
-
-  div.callout-note.callout-style-default .callout-title {
-    background-color: #dae6fb
-  }
-
-  div.callout-important {
-    border-left-color: #d9534f !important;
-  }
-
-  div.callout-important .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-important.callout-style-default .callout-title {
-    background-color: #f7dddc
-  }
-
-  div.callout-warning {
-    border-left-color: #f0ad4e !important;
-  }
-
-  div.callout-warning .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-warning.callout-style-default .callout-title {
-    background-color: #fcefdc
-  }
-
-  div.callout-tip {
-    border-left-color: #02b875 !important;
-  }
-
-  div.callout-tip .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
-  }
-
-  div.callout-tip.callout-style-default .callout-title {
-    background-color: #ccf1e3
-  }
-
-  div.callout-caution {
-    border-left-color: #fd7e14 !important;
-  }
-
-  div.callout-caution .callout-icon::before {
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
-  }
-
-  div.callout-caution.callout-style-default .callout-title {
-    background-color: #ffe5d0
-  }
-
-  </style>
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -336,14 +138,15 @@ Antonio J. Perán
 </div>
 
 </section>
-<section id="quién-soy" class="slide level2">
-<h2>¿Quién soy?</h2>
+<section id="un-poco-de-quién-soy-y-mi-relación-con-r" class="slide level2 smaller">
+<h2>Un poco de quién soy y mi relación con R</h2>
 <ul>
-<li class="fragment">Estudié matemáticas.</li>
+<li class="fragment">Estudié matemáticas en la UMU.</li>
 <li class="fragment">Mi primer contacto con R fue en el Servicio de Apoyo Estadístico de la Universidad de Murcia.</li>
-<li class="fragment">Estudié el máster en Tecnologías de datos masivos: Big Data de la Universidad de Murcia.</li>
-<li class="fragment">Como parte de mi TFM, trabajé con la empresa murciana Prosur usando R para determinar si unas salsas que producían estaban o no contaminadas con levaduras.</li>
+<li class="fragment">Estudié el máster en Tecnologías de datos masivos: Big Data de la UMU.</li>
+<li class="fragment">En mi TFM trabajé con la empresa murciana Prosur usando R y los datos de una nariz electrónica para determinar si unas salsas producidas por ellos estaban o no contaminadas con microorganismos.</li>
 <li class="fragment">Actualmente trabajo Okuant, un fondo de inversión inmobiliario con sede en Madrid.</li>
+<li class="fragment">Más actualmente soy alumno de doctorado en el programa de Ciencias Forenses.</li>
 </ul>
 </section>
 <section id="de-qué-vamos-a-hablar" class="slide level2">
@@ -361,9 +164,9 @@ Antonio J. Perán
 <section id="qué-es" class="slide level2">
 <h2>Qué es</h2>
 <ul>
-<li class="fragment">Es un fondo de inversión inmobiliario con sede en Madrid que opera en toda España. También tenemos oficinas en Barcelona y Sevilla.</li>
+<li class="fragment">Okuant es un fondo de inversión inmobiliario con sede en Madrid que opera en toda España. También tenemos oficinas en Barcelona y Sevilla.</li>
 <li class="fragment">De forma muy resumida, el negocio consiste en comprar grandes carteras de inmuebles a bancos y ponerlos a la venta.</li>
-<li class="fragment">También realizamos labores de gestión de activos (inmuebles) para otros fondos.</li>
+<li class="fragment">También realizamos labores de gestión de activos (inmuebles) para otros fondos, lo que se conoce como <em>servicing</em>.</li>
 </ul>
 </section>
 <section id="departamento-de-data-science" class="slide level2">
@@ -373,31 +176,31 @@ Antonio J. Perán
 <li class="fragment">Adrián, físico, Team Lead.</li>
 <li class="fragment">Michal, economista, Data Scientist.</li>
 <li class="fragment">Mar, física, Data Scientist.</li>
-<li class="fragment">Antonio, matemático, Data Scientist.</li>
+<li class="fragment">Antonio (yo), matemático, Data Scientist.</li>
 </ul>
 </section>
 <section id="casos-de-uso-de-r-en-okuant" class="slide level2">
 <h2>Casos de uso de R en Okuant</h2>
 <ul>
-<li class="fragment">Definir la arquitectura de datos y ETL</li>
+<li class="fragment">Definir la arquitectura de la base de datos y ETL</li>
 <li class="fragment">Crear un modelo de valoración automática de activos (Automated Valuation Model)</li>
 <li class="fragment">Forecasting de precios por zonas geográficas</li>
-<li class="fragment">Catalogación de zonas buenas (y malas) para inversión</li>
-<li class="fragment">Extracción de características de activos de fuentes de información no estructurada (Text-Mining)</li>
-<li class="fragment">Reporting: Creación de informes</li>
+<li class="fragment">Catalogación de tipologías y zonas buenas (y malas) para inversión</li>
+<li class="fragment">Extracción de características de activos a través de fuentes de información no estructurada (Text-Mining)</li>
+<li class="fragment">Reporting: Creación de Dashboards e Informes</li>
 </ul>
 </section></section>
 <section>
-<section id="definir-la-arquitectura-de-datos-y-etl" class="title-slide slide level1 center">
-<h1>Definir la arquitectura de datos y ETL</h1>
+<section id="definir-la-arquitectura-de-la-bbdd-y-etl" class="title-slide slide level1 center">
+<h1>Definir la arquitectura de la BBDD y ETL</h1>
 
 </section>
 <section id="objetivos" class="slide level2">
 <h2>Objetivos</h2>
 <ul>
 <li class="fragment">Integrar los datos de diversas fuentes en una base de datos centralizada.</li>
-<li class="fragment">El proceso de carga y transformación sea rastreable, eficiente y fácilmente reanudable en caso de error.</li>
-<li class="fragment">La base de datos mantenga un histórico.</li>
+<li class="fragment">Crear un proceso de carga y transformación rastreable, eficiente y fácilmente reanudable en caso de error.</li>
+<li class="fragment">Que la base de datos tenga un histórico (backup).</li>
 <li class="fragment">Tener disponibles las métricas más utilizados por los diversos proyectos.</li>
 </ul>
 </section>
@@ -410,8 +213,8 @@ Antonio J. Perán
 </ul>
 <aside class="notes">
 <ul>
-<li>Datos de inmuebles y carteras de bancos: Estos datos nos los sirven. Son ficheros .txt con datos de los distintos inmuebles así como sus históricos de precios.</li>
-<li>APIs: De aquí obtenemos datos sociodemográficos como la población, el paro, población en edad de compra o de alquiler, y datos geográficos de mapas.</li>
+<li>Datos de inmuebles y carteras de bancos: Estos datos nos los sirven. Son ficheros <code>.txt</code> con datos de los distintos inmuebles y sus históricos de precios.</li>
+<li>APIs: De aquí obtenemos datos sociodemográficos como la población, el paro, población en edad de compra o de alquiler, y datos geográficos como mapas.</li>
 <li>Nuestro propio CRM: Los datos de nuestros activos, sus características, precio, estados, etc y las ofertas y el estado de estas que realizan los comerciales.</li>
 </ul>
 <style type="text/css">
@@ -426,11 +229,12 @@ Antonio J. Perán
           display:block!important;
       }</style></aside>
 </section>
-<section id="datos-de-inmuebles-y-carteras-de-bancos" class="slide level2">
+<section id="datos-de-inmuebles-y-carteras-de-bancos" class="slide level2 smaller">
 <h2>Datos de inmuebles y carteras de bancos</h2>
 <ul>
 <li class="fragment">Son archivos muy pesados, hablamos de millones de filas, Gb’s de información.</li>
 <li class="fragment">Contienen variables de diversos tipos: <code>character</code>, <code>numeric</code>, <code>Date</code>, <code>logical</code>.</li>
+<li class="fragment">Al venir de diversas fuentes, hay que unificar ciertas variables, como municipio.</li>
 <li class="fragment">Contienen datos erróneos que hay que eliminar.</li>
 <li class="fragment">Contienen datos duplicados (mismo anuncio en el mismo portal o en distintos).</li>
 <li class="fragment">La gran mayoría no tiene informados ciertos datos necesarios como el distrito, por lo que hay que imputarlo.</li>
@@ -440,15 +244,15 @@ Antonio J. Perán
 <h2>APIs</h2>
 <ul>
 <li class="fragment"><strong>Catastro:</strong> Peticiones a la API de catastro por referencia catastral para obtener la superficie construída, superficie útil, etc.</li>
-<li class="fragment"><strong>INE y webs de ayuntamientos</strong>: Librerías como <code>INEbaseR</code>, o directamente web scraping a webs de ayuntamientos.</li>
-<li class="fragment"><strong>IGN</strong>: Básicamente mapas de provincias, muncipios y distritos en formato <code>.shp</code>. Una buena librería para trabajar con este tipo de datos es la librería <code>sf</code>.</li>
+<li class="fragment"><strong>INE y webs de ayuntamientos</strong>: Librerías como <code>INEbaseR</code>, o directamente <em>web scraping</em> a webs de ayuntamientos.</li>
+<li class="fragment"><strong>IGN</strong>: Mapas de provincias, muncipios y distritos en formato <code>.shp</code>. Una buena librería para trabajar con este tipo de datos es la librería <code>sf</code>.</li>
 </ul>
 </section>
 <section id="nuestro-propio-crm" class="slide level2">
 <h2>Nuestro propio CRM</h2>
 <ul>
 <li class="fragment">Contienen variables de diversos tipos: <code>character</code>, <code>numeric</code>, <code>Date</code>, <code>logical</code>.</li>
-<li class="fragment">Aunque el dato sí esté informado, muchas veces viene de distinta forma, luego hay que reimputar también campos como distrito.</li>
+<li class="fragment">Aunque el dato sí esté informado, hay que unificar criterios en variables como municipio o distrito.</li>
 <li class="fragment">También se procesan datos de los estados de las ofertas que se hacen para cada inmueble.</li>
 </ul>
 </section>
@@ -464,7 +268,7 @@ Antonio J. Perán
 </div><div class="column" style="width:35%;">
 <h3 id="targets"><code>targets</code></h3>
 <ul>
-<li class="fragment">Una librería muy reciente para creación de pipelines en R.</li>
+<li class="fragment">Una librería reciente para creación de pipelines en R.</li>
 <li class="fragment">Divide el flujo de datos en <em>targets</em> que dependen unos de otros y almacena los resultados intermedios para poder retomar el proceso en caso de fallo o en caso de modificación de alguno de los <em>targets</em>.</li>
 </ul>
 </div><div class="column" style="width:30%;">
@@ -474,9 +278,12 @@ Antonio J. Perán
 <li class="fragment"><code>FNN</code></li>
 <li class="fragment"><code>logger</code></li>
 </ul>
-</div>
-</div>
-</section></section>
+</div></div>
+</section>
+<section id="targets-visnetwork" class="slide level2">
+<h2>Targets Visnetwork</h2>
+
+<img data-src="targets_visnetwork_slow_summary.png" class="r-stretch"></section></section>
 <section>
 <section id="forecasting-de-precios-por-zonas-geográficas" class="title-slide slide level1 center">
 <h1>Forecasting de precios por zonas geográficas</h1>
@@ -488,7 +295,7 @@ Antonio J. Perán
 <ul>
 <li class="fragment">Las predicciones deben ser precisas en el largo plazo (6 meses).</li>
 <li class="fragment">Se dará más prioridad a afinar en el crecimiento o decrecimiento de la serie que a los valores.</li>
-<li class="fragment">Los pronósticos serán utilizados por otros departamentos.</li>
+<li class="fragment">Los pronósticos deben estar disponibles para otros departamentos, para visualización y uso.</li>
 </ul>
 <aside class="notes">
 <ul>
@@ -512,17 +319,19 @@ Antonio J. Perán
 <p>Los últimos diez valores de la tabla para Murcia serían</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>    provincia municipio      m_y precio_em2
- 1:    Murcia    Murcia Apr 2023   1051.224
- 2:    Murcia    Murcia May 2023   1067.415
- 3:    Murcia    Murcia Jun 2023   1067.748
- 4:    Murcia    Murcia Jul 2023   1076.468
- 5:    Murcia    Murcia Aug 2023   1079.148
- 6:    Murcia    Murcia Sep 2023   1073.411
- 7:    Murcia    Murcia Oct 2023   1067.301
- 8:    Murcia    Murcia Nov 2023   1073.456
- 9:    Murcia    Murcia Dec 2023   1095.371
-10:    Murcia    Murcia Jan 2024   1105.051</code></pre>
+<pre><code>Key: &lt;provincia, municipio, m_y&gt;
+    provincia municipio       m_y precio_em2
+       &lt;char&gt;    &lt;char&gt; &lt;yearmon&gt;      &lt;num&gt;
+ 1:    Murcia    Murcia  Apr 2024   1255.914
+ 2:    Murcia    Murcia  May 2024   1247.321
+ 3:    Murcia    Murcia  Jun 2024   1259.409
+ 4:    Murcia    Murcia  Jul 2024   1253.514
+ 5:    Murcia    Murcia  Aug 2024   1275.842
+ 6:    Murcia    Murcia  Sep 2024   1287.753
+ 7:    Murcia    Murcia  Oct 2024   1291.150
+ 8:    Murcia    Murcia  Nov 2024   1296.288
+ 9:    Murcia    Murcia  Dec 2024   1296.798
+10:    Murcia    Murcia  Jan 2025   1305.597</code></pre>
 </div>
 </div>
 </section>
@@ -534,40 +343,7 @@ Antonio J. Perán
 <h2>¿Qué es eso de forecasting?</h2>
 <p>Predecir valores futuros de una serie temporal con los datos disponibles hasta la fecha, tanto los de la propia serie (autorregresión), como los de otras variables externas que puedan influir en la variable a predecir.</p>
 
-<img data-src="presentacion_files/figure-revealjs/unnamed-chunk-7-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="cómo-cuantifico-cuánto-me-estoy-equivocando" class="slide level2 smaller">
-<h2>¿Cómo cuantifico cuánto me estoy equivocando?</h2>
-<p>Nosotros usamos dos métricas, una de ellas ampliamente utilizada y la otra más específica de nuestro caso de uso.</p>
-<ul>
-<li class="fragment"><strong>MAPE</strong> (Mean Absolute Percentaje Error): La fórmula es <span class="math display">\[\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\frac{A_i - F_i}{A_i}\]</span> Por ejemplo, si el valor real fuesen 1500 € y el valor pronosticado fuesen 1578 €, el MAPE en este caso sería del 0.052, o en porcentaje 5.2 %.</li>
-<li class="fragment"><strong>Diferencia de incrementos:</strong> Se suaviza con cualquier método de suavizado (en nuestro caso usamos LOESS) tanto la serie original como la serie original añadidas las predicciones. Se calcula el incremento de ambas series de los últimos 6 meses y se calcula la diferencia <span class="math inline">\(incremento_{a} - incremento_{f}\)</span>.</li>
-</ul>
-</section>
-<section id="gráfico-del-cálculo-de-la-diferencia-de-pendientes" class="slide level2 smaller">
-<h2>Gráfico del cálculo de la Diferencia de pendientes</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Suavizamos la serie original.</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="presentacion_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p>Suavizamos la serie con predicciones.</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img data-src="presentacion_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="gráfico-del-cálculo-de-la-diferencia-de-pendientes-1" class="slide level2 smaller">
-<h2>Gráfico del cálculo de la Diferencia de pendientes</h2>
-<p>Calculamos la diferencia de los incrementos percentuales de los últimos 6 meses. El resultado sería 0.0045143.</p>
-
-<img data-src="presentacion_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch quarto-figure-center"></section>
+<img data-src="presentacion_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="qué-modelos-hemos-utilizado" class="slide level2">
 <h2>¿Qué modelos hemos utilizado?</h2>
 <ul>
@@ -585,7 +361,7 @@ Antonio J. Perán
 <li class="fragment">Cogemos la serie original y eliminamos los 6 últimos valores, que reservamos para testear la capacidad predictiva del modelo.</li>
 <li class="fragment">Ajustamos cualquier modelo de nuestra elección al subconjunto de la serie seleccionado en el paso anterior.</li>
 <li class="fragment">Calculamos las predicciones del modelo para los próximos 6 meses.</li>
-<li class="fragment">Con los 6 valores de pronóstico y los últimos 6 valores de la serie que reservamos, calculamos la métrica de nuestra elección, por ejemplo el MAPE.</li>
+<li class="fragment">Con los 6 valores de pronóstico y los últimos 6 valores de la serie que reservamos, calculamos la métrica de error de nuestra elección, por ejemplo el MAPE.</li>
 </ul>
 </section>
 <section id="cómo-entrenamos-y-evaluamos-los-distintos-modelos-1" class="slide level2">
@@ -594,18 +370,65 @@ Antonio J. Perán
 <div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="presentacion_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+<div>
+<figure>
+<p><img data-src="presentacion_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
 <div class="cell-output-display">
-<p><img data-src="presentacion_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+<div>
+<figure>
+<p><img data-src="presentacion_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</figure>
 </div>
 </div>
 </div>
-</div>
+</div></div>
 </section>
+<section id="cómo-cuantifico-cuánto-me-estoy-equivocando" class="slide level2 smaller">
+<h2>¿Cómo cuantifico cuánto me estoy equivocando?</h2>
+<p>Nosotros usamos dos métricas, una de ellas ampliamente utilizada y la otra más específica de nuestro caso de uso.</p>
+<ul>
+<li class="fragment"><strong>MAPE</strong> (Mean Absolute Percentaje Error): La fórmula es <span class="math display">\[\text{MAPE} = \frac{1}{n}\sum_{i=1}^{n}\left\lvert\frac{A_i - F_i}{A_i}\right\lvert\]</span> Donde A son valores reales y F valores pronosticados. Por ejemplo, si el valor real fuese 1500 € y pronosticado 1578 €, el MAPE en este caso daría 0.052, o en porcentaje 5.2 %.</li>
+<li class="fragment"><strong>Diferencia de incrementos:</strong> Se suaviza con cualquier método de suavizado (en nuestro caso usamos LOESS) tanto la serie original como la serie original añadidas las predicciones. Se calcula el incremento de ambas series de los últimos 6 meses y se calcula la diferencia <span class="math inline">\(incremento_{a} - incremento_{f}\)</span>.</li>
+</ul>
+</section>
+<section id="gráfico-del-cálculo-de-la-diferencia-de-pendientes" class="slide level2 smaller">
+<h2>Gráfico del cálculo de la Diferencia de pendientes</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Suavizamos la serie original.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Suavizamos la serie con predicciones.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="presentacion_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="gráfico-del-cálculo-de-la-diferencia-de-pendientes-1" class="slide level2 smaller">
+<h2>Gráfico del cálculo de la Diferencia de pendientes</h2>
+<p>Calculamos la diferencia de los incrementos percentuales de los últimos 6 meses. El resultado sería 0.0060472.</p>
+
+<img data-src="presentacion_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
 <section id="como-obtenemos-el-modelo-final" class="slide level2">
 <h2>¿Como obtenemos el modelo final?</h2>
 <p>Los pasos a seguir son</p>
@@ -618,32 +441,61 @@ Antonio J. Perán
 <section id="como-obtenemos-el-modelo-final-1" class="slide level2">
 <h2>¿Como obtenemos el modelo final?</h2>
 
-<img data-src="presentacion_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch quarto-figure-center"></section>
-<section id="tabla-de-errores-y-pronósticos" class="slide level2">
+<img data-src="presentacion_files/figure-revealjs/unnamed-chunk-14-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="tabla-de-errores-y-pronósticos" class="slide level2 smaller">
 <h2>Tabla de errores y pronósticos</h2>
 <p>Finalmente podemos crear una tabla con los pronósticos, el error que habíamos obtenido en test y el posible incremento de la serie de precios.</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>             [,1]         
-MAPE         "0.97 %"     
-Feb 2024     "1114.2 €/m2"
-Mar 2024     "1111.1 €/m2"
-Apr 2024     "1104.6 €/m2"
-May 2024     "1108.3 €/m2"
-Jun 2024     "1111.5 €/m2"
-Jul 2024     "1115.7 €/m2"
-Inc. próx 6m "0.97 %"     </code></pre>
+<div class="cell-output-display">
+<table class="caption-top">
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">MAPE</td>
+<td style="text-align: left;">1.7 %</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Feb 2025</td>
+<td style="text-align: left;">1314 €/m2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Mar 2025</td>
+<td style="text-align: left;">1321.6 €/m2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Apr 2025</td>
+<td style="text-align: left;">1328 €/m2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">May 2025</td>
+<td style="text-align: left;">1331.4 €/m2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Jun 2025</td>
+<td style="text-align: left;">1338.8 €/m2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Jul 2025</td>
+<td style="text-align: left;">1342.7 €/m2</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Inc.&nbsp;próx 6m</td>
+<td style="text-align: left;">2.84 %</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </section></section>
 <section id="pasamos-a-la-demo" class="title-slide slide level1 center">
 <h1>Pasamos a la demo</h1>
+
+</section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
 
 </div>
-</section>
-    </div>
-  </div>
+</div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
   <script src="presentacion_files/libs/revealjs/dist/reveal.js"></script>
@@ -668,12 +520,12 @@ Inc. próx 6m "0.97 %"     </code></pre>
       Reveal.initialize({
 'controlsAuto': true,
 'previewLinksAuto': false,
-'smaller': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -827,7 +679,7 @@ Inc. próx 6m "0.97 %"     </code></pre>
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -923,18 +775,7 @@ Inc. próx 6m "0.97 %"     </code></pre>
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -966,11 +807,48 @@ Inc. próx 6m "0.97 %"     </code></pre>
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
-      function tippyHover(el, contentFn) {
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
         const config = {
           allowHTML: true,
-          content: contentFn,
           maxWidth: 500,
           delay: 100,
           arrow: false,
@@ -980,8 +858,17 @@ Inc. próx 6m "0.97 %"     </code></pre>
           interactive: true,
           interactiveBorder: 10,
           theme: 'light-border',
-          placement: 'bottom-start'
+          placement: 'bottom-start',
         };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
           config['offset'] = [0,0];
           config['maxWidth'] = 700;
         window.tippy(el, config); 
@@ -995,7 +882,11 @@ Inc. próx 6m "0.97 %"     </code></pre>
           try { href = new URL(href).hash; } catch {}
           const id = href.replace(/^#\/?/, "");
           const note = window.document.getElementById(id);
-          return note.innerHTML;
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
         });
       }
       const findCites = (el) => {
